@@ -1,0 +1,144 @@
+02.20 8:59 PM
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.page {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+/* Navigation buttons */
+.nav-btn {
+  position: absolute;
+  bottom: 30px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+/* Center buttons */
+.center-buttons {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 25%;
+}
+
+.center-buttons button {
+  padding: 12px 25px;
+  margin: 10px;
+  border: none;
+  border-radius: 30px;
+  background: #ff4d88;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+audio {
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Page 1 -->
+<div class="page active" id="p1" style="background-image:url('page1.jpg')">
+  <button class="nav-btn next" onclick="changePage(1)">Next ➡</button>
+</div>
+
+<!-- Page 2 -->
+<div class="page" id="p2" style="background-image:url('page2.jpg')">
+  <button class="nav-btn prev" onclick="changePage(-1)">⬅ Prev</button>
+  <button class="nav-btn next" onclick="changePage(1)">Next ➡</button>
+</div>
+
+<!-- Page 3 -->
+<div class="page" id="p3" style="background-image:url('page3.jpg')">
+  <button class="nav-btn prev" onclick="changePage(-1)">⬅ Prev</button>
+  <button class="nav-btn next" onclick="changePage(1)">Next ➡</button>
+</div>
+
+<!-- Page 4 -->
+<div class="page" id="p4" style="background-image:url('page4.jpg')">
+  <div class="center-buttons">
+    <a href="YOUR_SPOTIFY_PLAYLIST_LINK" target="_blank">
+      <button>Songs That Remind Me of You </button>
+    </a>
+  </div>
+
+  <button class="nav-btn prev" onclick="changePage(-1)">⬅ Prev</button>
+  <button class="nav-btn next" onclick="changePage(1)">Next ➡</button>
+</div>
+
+<!-- Page 5 -->
+<div class="page" id="p5" style="background-image:url('background.jpg')">
+  <div class="center-buttons">
+    <button onclick="playVoice()">Message For You </button><br>
+    <a href="FLOWER_SITE_LINK" target="_blank">
+      <button>Bouquet For You </button>
+    </a><br>
+    <a href="CAKE_SITE_LINK" target="_blank">
+      <button>Cake For You </button>
+    </a><br>
+
+    <audio id="voice">
+      <source src="voicenote.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <button class="nav-btn prev" onclick="changePage(-1)">⬅ Prev</button>
+</div>
+
+<script>
+let currentPage = 1;
+const totalPages = 5;
+
+function changePage(direction) {
+  document.getElementById("p" + currentPage).classList.remove("active");
+  currentPage += direction;
+
+  if (currentPage < 1) currentPage = 1;
+  if (currentPage > totalPages) currentPage = totalPages;
+
+  document.getElementById("p" + currentPage).classList.add("active");
+}
+
+function playVoice() {
+  document.getElementById("voice").play();
+}
+</script>
+
+</body>
+</html>

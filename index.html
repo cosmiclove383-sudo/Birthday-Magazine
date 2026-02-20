@@ -7,28 +7,33 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       font-family: Arial, sans-serif;
 
-      /* Background autofill */
       background: url("background.jpg") no-repeat center center fixed;
       background-size: cover;
+    }
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .magazine {
+      position: relative;
+      width: 60vw;
+      max-width: 500px;
+      aspect-ratio: 1 / 1.414; /* A4 ratio */
+      background: white;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      border-radius: 8px;
+      overflow: hidden;
     }
 
     .page {
-      width: 60vw;              /* responsive A4 scaling */
-      max-width: 500px;         /* keeps it small enough */
-      aspect-ratio: 1 / 1.414;  /* A4 ratio */
-      background: white;
-      margin: 40px 0;
-      position: relative;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-      border-radius: 6px;
-      overflow: hidden;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: none;
     }
 
     .page img {
@@ -37,17 +42,20 @@
       object-fit: cover;
     }
 
+    .active {
+      display: block;
+    }
+
     .button-container {
       position: absolute;
       top: 15px;
-      left: 0;
-      right: 0;
+      width: 100%;
       text-align: center;
     }
 
     .button-container button,
     .button-container a {
-      padding: 8px 16px;
+      padding: 8px 14px;
       margin: 5px;
       border: none;
       border-radius: 20px;
@@ -55,7 +63,7 @@
       color: white;
       cursor: pointer;
       text-decoration: none;
-      font-size: 14px;
+      font-size: 13px;
       transition: 0.3s;
     }
 
@@ -64,12 +72,30 @@
       background: #e63950;
     }
 
+    .nav-buttons {
+      margin-top: 20px;
+    }
+
+    .nav-buttons button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      border: none;
+      border-radius: 25px;
+      background: black;
+      color: white;
+      cursor: pointer;
+    }
+
+    .nav-buttons button:hover {
+      opacity: 0.8;
+    }
+
     audio {
       display: none;
     }
 
     @media (max-width: 600px) {
-      .page {
+      .magazine {
         width: 85vw;
       }
     }
@@ -78,53 +104,84 @@
 
 <body>
 
-  <!-- PAGE 1 -->
-  <div class="page">
-    <img src="page1.jpg">
-  </div>
+  <div class="magazine">
 
-  <!-- PAGE 2 -->
-  <div class="page">
-    <img src="page2.jpg">
-  </div>
-
-  <!-- PAGE 3 -->
-  <div class="page">
-    <img src="page3.jpg">
-  </div>
-
-  <!-- PAGE 4 -->
-  <div class="page">
-    <img src="page4.jpg">
-    <div class="button-container">
-      <a href="https://open.spotify.com/" target="_blank">
-        Songs that remind me of you
-      </a>
-    </div>
-  </div>
-
-  <!-- PAGE 5 -->
-  <div class="page">
-    <img src="page4.jpg"> <!-- reuse page4 or replace with page5 image if you want -->
-
-    <div class="button-container">
-      <button onclick="playVoice()">Message For You</button>
-
-      <a href="https://example.com/bouquet" target="_blank">
-        Bouquet For You
-      </a>
-
-      <a href="https://example.com/cake" target="_blank">
-        Cake For You
-      </a>
+    <!-- PAGE 1 -->
+    <div class="page active">
+      <img src="page1.jpg">
     </div>
 
-    <audio id="voiceNote">
-      <source src="voicenote.mp3" type="audio/mpeg">
-    </audio>
+    <!-- PAGE 2 -->
+    <div class="page">
+      <img src="page2.jpg">
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page">
+      <img src="page3.jpg">
+    </div>
+
+    <!-- PAGE 4 -->
+    <div class="page">
+      <img src="page4.jpg">
+      <div class="button-container">
+        <a href="https://open.spotify.com/" target="_blank">
+          Songs that remind me of you
+        </a>
+      </div>
+    </div>
+
+    <!-- PAGE 5 -->
+    <div class="page">
+      <img src="page4.jpg">
+
+      <div class="button-container">
+        <button onclick="playVoice()">Message For You</button>
+
+        <a href="https://example.com/bouquet" target="_blank">
+          Bouquet For You
+        </a>
+
+        <a href="https://example.com/cake" target="_blank">
+          Cake For You
+        </a>
+      </div>
+
+      <audio id="voiceNote">
+        <source src="voicenote.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+  </div>
+
+  <div class="nav-buttons">
+    <button onclick="prevPage()">Previous</button>
+    <button onclick="nextPage()">Next</button>
   </div>
 
   <script>
+    let currentPage = 0;
+    const pages = document.querySelectorAll(".page");
+
+    function showPage(index) {
+      pages.forEach(page => page.classList.remove("active"));
+      pages[index].classList.add("active");
+    }
+
+    function nextPage() {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 0) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    }
+
     function playVoice() {
       document.getElementById("voiceNote").play();
     }

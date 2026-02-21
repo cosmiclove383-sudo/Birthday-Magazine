@@ -1,205 +1,190 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title Birthday Magazine</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>  <html>  
+<head>  
+  <title>My Magazine</title>  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">    <style>  
+    body {  
+      margin: 0;  
+      height: 100vh;  
+      display: flex;  
+      justify-content: center;  
+      align-items: center;  
+      flex-direction: column;  
+      font-family: Arial, sans-serif;  
+  
+      background: url("background.jpg") no-repeat center center fixed;  
+      background-size: cover;  
+    }  
+  
+    .magazine {  
+      position: relative;  
+      width: 60vw;  
+      max-width: 500px;  
+      aspect-ratio: 1 / 1.414; /* A4 ratio */  
+      background: white;  
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);  
+      border-radius: 8px;  
+      overflow: hidden;  
+    }  
+  
+    .page {  
+      position: absolute;  
+      width: 100%;  
+      height: 100%;  
+      display: none;  
+    }  
+  
+    .page img {  
+      width: 100%;  
+      height: 100%;  
+      object-fit: cover;  
+    }  
+  
+    .active {  
+      display: block;  
+    }  
+  
+    .button-container {  
+  position: absolute;  
+  top: 15px;  
+  left: 0;  
+  right: 0;  
+  padding: 0 20px;  
+  
+  display: flex;  
+  flex-direction: column;   /* stack vertically */  
+  align-items: center;      /* center horizontally */  
+  gap: 12px;                /* space between buttons */  
+    }  
+  
+    .button-container button,  
+    .button-container button,  
+.button-container a {  
+  padding: 8px 16px;  
+  font-size: 14px;  
+  width: 80%;               /* makes them look neat */  
+  max-width: 260px;         /* prevents stretching too much */  
+}  
+  
+.button-container button,  
+    .button-container a {  
+      padding: 8px 14px;  
+      margin: 5px;  
+      border: none;  
+      border-radius: 20px;  
+      background: #ff4d6d;  
+      color: white;  
+      cursor: pointer;  
+      text-decoration: none;  
+      font-size: 13px;  
+      transition: 0.3s;  
+    }  
+  
+    .button-container button:hover,  
+    .button-container a:hover {  
+      background: #e63950;  
+    }  
+  
+    .nav-buttons {  
+      margin-top: 20px;  
+    }  
+  
+    .nav-buttons button {  
+      padding: 10px 20px;  
+      margin: 0 10px;  
+      border: none;  
+      border-radius: 25px;  
+      background: black;  
+      color: white;  
+      cursor: pointer;  
+    }  
+  
+    .nav-buttons button:hover {  
+      opacity: 0.8;  
+    }  
+  
+    audio {  
+      display: none;  
+    }  
+  
+    @media (max-width: 600px) {  
+      .magazine {  
+        width: 85vw;  
+      }  
+    }  
+  </style>  </head>  <body>    <div class="magazine">  <!-- PAGE 1 -->  
+<div class="page active">  
+  <img src="page1.jpg">  
+</div>  
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      font-family: Arial, sans-serif;
-      background: url("background.jpg") no-repeat center center fixed;
-      background-size: cover;
-    }
+<!-- PAGE 2 -->  
+<div class="page">  
+  <img src="page2.jpg">  
+</div>  
 
-    .magazine {
-      position: relative;
-      width: 60vw;
-      max-width: 500px;
-      aspect-ratio: 1 / 1.414;
-      background: white;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-      border-radius: 12px;
-      overflow: hidden;
-    }
+<!-- PAGE 3 -->  
+<div class="page">  
+  <img src="page3.jpg">  
+</div>  
 
-    .page {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: none;
-    }
+<!-- PAGE 4 -->  
+<div class="page">  
+  <img src="page4.jpg">  
+  <div class="button-container">  
+    <a href="https://open.spotify.com/playlist/3x24oPBib31QQwWrfVu66H?si=kROl9uZTQF-L-r-mpNu37Q&pt=17209e0bf4db2be98944f98bd6940b60&pi=m9f7UZVKR2eN-" target="_blank">  
+      Songs that remind me of you  
+    </a>  
+  </div>  
+</div>  
 
-    .page img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+<!-- PAGE 5 -->  
+<div class="page">  
+  <img src="page5.jpg">  
 
-    .active {
-      display: block;
-    }
+  <div class="button-container">  
+    <button onclick="playVoice()">Message For You</button>  
 
-    /* ===== BUTTON CONTAINER ===== */
-    .button-container {
-      position: absolute;
-      top: 25px;
-      left: 0;
-      right: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      padding: 0 20px;
-    }
+    <a href="https://egreet.in/bouquet/happybirthdaydyutismita" target="_blank">  
+      Bouquet For You  
+    </a>  
 
-    /* ===== UNIFIED BUTTON STYLE ===== */
-    .button-container button,
-    .button-container a {
-      width: 85%;
-      max-width: 280px;
-      padding: 12px;
-      border: none;
-      border-radius: 25px;
-      background: #ff3b6c;
-      color: white;
-      font-size: 15px;
-      font-weight: 500;
-      text-align: center;
-      cursor: pointer;
-      text-decoration: none;
-      transition: 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
+    <a href="https://bdaycake.com/ardur_7543" target="_blank">  
+      Cake For You  
+    </a>  
+  </div>  
 
-    .button-container button:hover,
-    .button-container a:hover {
-      background: #e02a57;
-      transform: translateY(-2px);
-    }
+  <audio id="voiceNote">  
+    <source src="voicenote.mp3" type="audio/mpeg">  
+  </audio>  
+</div>
 
-    /* ===== NAVIGATION BUTTONS ===== */
-    .nav-buttons {
-      margin-top: 25px;
-    }
-
-    .nav-buttons button {
-      padding: 10px 22px;
-      margin: 0 10px;
-      border: none;
-      border-radius: 25px;
-      background: black;
-      color: white;
-      font-size: 14px;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    .nav-buttons button:hover {
-      opacity: 0.8;
-    }
-
-    audio {
-      display: none;
-    }
-
-    @media (max-width: 600px) {
-      .magazine {
-        width: 85vw;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="magazine">
-
-    <!-- PAGE 1 -->
-    <div class="page active">
-      <img src="page1.jpg">
-    </div>
-
-    <!-- PAGE 2 -->
-    <div class="page">
-      <img src="page2.jpg">
-    </div>
-
-    <!-- PAGE 3 -->
-    <div class="page">
-      <img src="page3.jpg">
-    </div>
-
-    <!-- PAGE 4 -->
-    <div class="page">
-      <img src="page4.jpg">
-      <div class="button-container">
-        <a href="https://open.spotify.com/playlist/3x24oPBib31QQwWrfVu66H?si=kROl9uZTQF-L-r-mpNu37Q&pt=17209e0bf4db2be98944f98bd6940b60&pi=m9f7UZVKR2eN-" target="_blank">
-          Songs That Remind Me Of You
-        </a>
-      </div>
-    </div>
-
-    <!-- PAGE 5 -->
-    <div class="page">
-      <img src="page5.jpg">
-
-      <div class="button-container">
-        <button onclick="playVoice()">Message For You</button>
-
-        <a href="https://egreet.in/bouquet/happybirthdaydyutismita" target="_blank">
-          Bouquet For You
-        </a>
-
-        <a href="https://bdaycake.com/ardur_7543" target="_blank">
-          Cake For You
-        </a>
-      </div>
-
-      <audio id="voiceNote">
-        <source src="voicenote.mp3" type="audio/mpeg">
-      </audio>
-    </div>
-
-  </div>
-
-  <div class="nav-buttons">
-    <button onclick="prevPage()">Previous</button>
-    <button onclick="nextPage()">Next</button>
-  </div>
-
-  <script>
-    let currentPage = 0;
-    const pages = document.querySelectorAll(".page");
-
-    function showPage(index) {
-      pages.forEach(page => page.classList.remove("active"));
-      pages[index].classList.add("active");
-    }
-
-    function nextPage() {
-      if (currentPage < pages.length - 1) {
-        currentPage++;
-        showPage(currentPage);
-      }
-    }
-
-    function prevPage() {
-      if (currentPage > 0) {
-        currentPage--;
-        showPage(currentPage);
-      }
-    }
-
-    function playVoice() {
-      document.getElementById("voiceNote").play();
-    }
-  </script>
-
-</body>
-  </html>
+  </div>    <div class="nav-buttons">  
+    <button onclick="prevPage()">Previous</button>  
+    <button onclick="nextPage()">Next</button>  
+  </div>    <script>  
+    let currentPage = 0;  
+    const pages = document.querySelectorAll(".page");  
+  
+    function showPage(index) {  
+      pages.forEach(page => page.classList.remove("active"));  
+      pages[index].classList.add("active");  
+    }  
+  
+    function nextPage() {  
+      if (currentPage < pages.length - 1) {  
+        currentPage++;  
+        showPage(currentPage);  
+      }  
+    }  
+  
+    function prevPage() {  
+      if (currentPage > 0) {  
+        currentPage--;  
+        showPage(currentPage);  
+      }  
+    }  
+  
+    function playVoice() {  
+      document.getElementById("voiceNote").play();  
+    }  
+  </script>  </body>  
+</html>

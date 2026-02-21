@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Magazine</title>
+  <title Birthday Magazine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -13,7 +13,6 @@
       align-items: center;
       flex-direction: column;
       font-family: Arial, sans-serif;
-
       background: url("background.jpg") no-repeat center center fixed;
       background-size: cover;
     }
@@ -22,10 +21,10 @@
       position: relative;
       width: 60vw;
       max-width: 500px;
-      aspect-ratio: 1 / 1.414; /* A4 ratio */
+      aspect-ratio: 1 / 1.414;
       background: white;
       box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-      border-radius: 8px;
+      border-radius: 12px;
       overflow: hidden;
     }
 
@@ -46,59 +45,59 @@
       display: block;
     }
 
+    /* ===== BUTTON CONTAINER ===== */
     .button-container {
-  position: absolute;
-  top: 15px;
-  left: 0;
-  right: 0;
-  padding: 0 20px;
-
-  display: flex;
-  flex-direction: column;   /* stack vertically */
-  align-items: center;      /* center horizontally */
-  gap: 12px;                /* space between buttons */
+      position: absolute;
+      top: 25px;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      padding: 0 20px;
     }
 
+    /* ===== UNIFIED BUTTON STYLE ===== */
     .button-container button,
-    .button-container button,
-.button-container a {
-  padding: 8px 16px;
-  font-size: 14px;
-  width: 80%;               /* makes them look neat */
-  max-width: 260px;         /* prevents stretching too much */
-}
-
-.button-container button,
     .button-container a {
-      padding: 8px 14px;
-      margin: 5px;
+      width: 85%;
+      max-width: 280px;
+      padding: 12px;
       border: none;
-      border-radius: 20px;
-      background: #ff4d6d;
+      border-radius: 25px;
+      background: #ff3b6c;
       color: white;
+      font-size: 15px;
+      font-weight: 500;
+      text-align: center;
       cursor: pointer;
       text-decoration: none;
-      font-size: 13px;
-      transition: 0.3s;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     .button-container button:hover,
     .button-container a:hover {
-      background: #e63950;
+      background: #e02a57;
+      transform: translateY(-2px);
     }
 
+    /* ===== NAVIGATION BUTTONS ===== */
     .nav-buttons {
-      margin-top: 20px;
+      margin-top: 25px;
     }
 
     .nav-buttons button {
-      padding: 10px 20px;
+      padding: 10px 22px;
       margin: 0 10px;
       border: none;
       border-radius: 25px;
       background: black;
       color: white;
+      font-size: 14px;
       cursor: pointer;
+      transition: 0.3s ease;
     }
 
     .nav-buttons button:hover {
@@ -141,7 +140,7 @@
       <img src="page4.jpg">
       <div class="button-container">
         <a href="https://open.spotify.com/playlist/3x24oPBib31QQwWrfVu66H?si=kROl9uZTQF-L-r-mpNu37Q&pt=17209e0bf4db2be98944f98bd6940b60&pi=m9f7UZVKR2eN-" target="_blank">
-          Songs that remind me of you
+          Songs That Remind Me Of You
         </a>
       </div>
     </div>
@@ -203,4 +202,4 @@
   </script>
 
 </body>
-</html>
+  </html>
